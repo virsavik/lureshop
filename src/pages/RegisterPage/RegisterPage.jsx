@@ -25,6 +25,7 @@ const RegisterPage = () => {
   });
   const navigate = useNavigate();
 
+  // eslint-disable-next-line no-undef
   const onSubmit = values => alert(JSON.stringify(values));
 
   return (
@@ -67,7 +68,7 @@ const RegisterPage = () => {
               pattern: { value: /^\S+@\S+$/, message: 'Invalid email address' },
             })}
             invalid={!!errors.email}
-            error={errors.email?.message}
+            error={errors.email && errors.email.message}
           />
           <ValidatedInput
             id="password"
@@ -76,7 +77,7 @@ const RegisterPage = () => {
             placeholder="Password"
             {...register('password', { required: 'Required' })}
             invalid={!!errors.password}
-            error={errors.password?.message}
+            error={errors.password && errors.password.message}
           />
           <Row xs="2">
             <Col>

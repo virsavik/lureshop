@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios, { AxiosResponse } from 'axios';
-import { AppThunk } from 'src/configs/store';
+import axios from 'axios';
 import { StorageAPI } from 'src/shared/util/storage-util';
 import { serializeAxiosError } from './reducer.utils';
 
 const AUTH_TOKEN_KEY = 'authToken';
+// eslint-disable-next-line no-undef
 const API_URL = process.env.API_URL;
 
 export const initialState = {
@@ -13,21 +13,19 @@ export const initialState = {
   loginSuccess: false,
   loginError: false, // Errors returned from the server
   showModalLogin: false,
-  account: {} as any, // User account
-  errorMessage: null as unknown as string,
-  redirectMessage: null as unknown as string,
+  account: {}, // User account
+  errorMessage: null,
+  redirectMessage: null,
   sessionHasBeenFetched: false,
-  logoutUrl: null as unknown as string,
+  logoutUrl: null,
 };
-
-export type AuthenticationState = Readonly<typeof initialState>;
 
 // Actions
 
 export const getAccount = createAsyncThunk(
   'authentication/get_account',
   async () =>
-    axios.get<any>(`${API_URL}/users/profile`, {
+    axios.get(`${API_URL}/users/profile`, {
       headers: {
         Authorization: `Bearer ${
           StorageAPI.local.get(AUTH_TOKEN_KEY) || StorageAPI.session.get(AUTH_TOKEN_KEY)
@@ -39,25 +37,17 @@ export const getAccount = createAsyncThunk(
   }
 );
 
-interface IAuthParam {
-  username: string;
-  password: string;
-  rememberMe?: boolean;
-}
-
 export const authenticate = createAsyncThunk(
   'authentication/signin',
-  async (auth: IAuthParam) => axios.post(`${API_URL}/login`, auth),
+  async ({username, password, rememberMe}) => axios.post(`${API_URL}/login`, {username, password, rememberMe}),
   {
     serializeError: serializeAxiosError,
   }
 );
 
-export const signin: (username: string, password: string, rememberMe?: boolean) => AppThunk =
-  (username, password, rememberMe = false) =>
-  async dispatch => {
+export const signin = (username, password, rememberMe = false) => async dispatch => {
     const result = await dispatch(authenticate({ username, password, rememberMe }));
-    const response = result.payload as AxiosResponse;
+    const response = result.payload// as AxiosResponse;
     const bearerToken = response.data.token; // Bearer token from the server
     if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
       const jwt = bearerToken.slice(7, bearerToken.length);
@@ -85,7 +75,7 @@ export const clearAuthToken = () => {
   }
 };
 
-export const logout: () => AppThunk = () => dispatch => {
+export const logout = () => dispatch => {
   clearAuthToken();
   dispatch(logoutSession());
 };
@@ -100,7 +90,7 @@ export const clearAuthentication = messageKey => dispatch => {
 
 export const AuthenticationSlice = createSlice({
   name: 'authentication',
-  initialState: initialState as AuthenticationState,
+  initialState, // as AuthenticationState,
   reducers: {
     logoutSession() {
       return {

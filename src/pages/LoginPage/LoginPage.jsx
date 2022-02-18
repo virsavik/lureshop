@@ -1,27 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Button,
   Col,
   Container,
   Form,
-  FormFeedback,
-  FormGroup,
-  Input,
-  InputProps,
-  Label,
   Row,
 } from 'reactstrap';
 import ValidatedInput from 'src/shared/components/ValidatedInput';
-
-// const ValidatedInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
-//   <FormGroup>
-//     <Input {...props} innerRef={ref} />
-//     <FormFeedback>Required</FormFeedback>
-//   </FormGroup>
-// ));
 
 const LoginPage = () => {
   const {
@@ -36,6 +24,7 @@ const LoginPage = () => {
   });
   const navigate = useNavigate();
 
+  // eslint-disable-next-line no-undef
   const onSubmit = values => alert(JSON.stringify(values));
 
   return (
@@ -81,7 +70,7 @@ const LoginPage = () => {
               pattern: { value: /^\S+@\S+$/, message: 'Invalid email address' },
             })}
             invalid={!!errors.email}
-            error={errors.email?.message}
+            error={errors.email && errors.email.message}
           />
           <ValidatedInput
             id="password"
@@ -90,7 +79,7 @@ const LoginPage = () => {
             placeholder="Password"
             {...register('password', { required: 'Required' })}
             invalid={!!errors.password}
-            error={errors.password?.message}
+            error={errors.password && errors.password.message}
           />
           <Row xs="2">
             <Col>

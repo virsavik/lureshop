@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import ROUTES from './routes';
-import { LinearProgress } from '@mui/material';
+import SpinnerBar from './shared/components/Spinner';
 import MainLayout from './shared/layouts/main-layout';
 
 const BrowerRouterProvider = () => {
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Router>
       <MainLayout>
-        <Suspense fallback={<LinearProgress color="secondary" />}>
+        <Suspense fallback={<SpinnerBar />}>
           <BrowerRouterProvider />
         </Suspense>
       </MainLayout>

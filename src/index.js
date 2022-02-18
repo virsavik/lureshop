@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { loadIcon } from 'src/configs/icon-loaders';
 import getStore from 'src/configs/store';
 import React from 'react';

@@ -1,10 +1,9 @@
-import React, { Suspense, useState } from 'react';
+import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from './footer';
 import { toast, ToastContainer } from 'react-toastify';
-import WNavBar, { NavItemType } from './navbar';
+import WNavBar from './navbar';
 
-const itemList: NavItemType[] = [
+const itemList = [
   { label: 'Home', icon: 'home', path: '/' },
   { label: 'Product', icon: ['fab', 'product-hunt'], path: '/product' },
   {
@@ -38,16 +37,9 @@ const itemList: NavItemType[] = [
   { label: 'Liked', icon: 'heart', path: '/liked' },
 ];
 
-interface AppProps {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-  children: React.ReactNode;
-}
 
-const MainLayout = (props: AppProps) => {
+
+const MainLayout = (props) => {
   return (
     <div>
       <ToastContainer
@@ -71,7 +63,7 @@ const MainLayout = (props: AppProps) => {
       >
         {props.children}
       </div>
-      <Footer title="lureshop" description="This is a website" />
+      {/* <Footer title="lureshop" description="This is a website" /> */}
     </div>
   );
 };

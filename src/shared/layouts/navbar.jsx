@@ -1,4 +1,3 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import {
@@ -15,21 +14,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 
-export type NavItemType = {
-  label: string;
-  icon?: IconProp;
-  path?: string;
-  subItems?: NavItemType[];
-};
-
-type PropsType = {
-  title: string;
-  styles?: React.CSSProperties;
-  expand: string;
-  items: NavItemType[];
-};
-
-const WNavBar = (props: PropsType) => {
+const WNavBar = (props) => {
   const { title, styles, expand, items } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 

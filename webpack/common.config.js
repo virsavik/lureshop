@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: ['react-hot-loader/patch', './src/index.tsx'],
+  entry: ['react-hot-loader/patch', './src/index.js'],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
@@ -19,7 +19,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts(x)?$/,
+        test: /\.js(x)?$/,
         use: [{
             loader: 'babel-loader',
             options: {
