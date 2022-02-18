@@ -16,7 +16,7 @@
 - [x] React with webpack (typescript, eslint, prettier).
 - [x] Integrated a state manager(redux toolkit).
 - [ ] Support multiple languages(I18N).
-- [x] Integrated mui & react-hook-form.
+- [x] Integrated ReactStrap & react-hook-form.
 - [ ] Set up e2e test tool (cypress).
 - [ ] Integrated PWA with Workbox Inject manifest.
 - [x] Make 2 profile (dev and prod).
