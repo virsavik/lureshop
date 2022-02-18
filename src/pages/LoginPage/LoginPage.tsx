@@ -1,12 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Box, Button, Grid, Link, TextField, Typography } from '@mui/material';
-import Divider from '@mui/material/Divider';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormFeedback,
+  FormGroup,
+  Input,
+  InputProps,
+  Label,
+  Row,
+} from 'reactstrap';
+import ValidatedInput from 'src/shared/components/ValidatedInput';
+
+// const ValidatedInput = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+//   <FormGroup>
+//     <Input {...props} innerRef={ref} />
+//     <FormFeedback>Required</FormFeedback>
+//   </FormGroup>
+// ));
 
 const LoginPage = () => {
   const {
-    control,
+    register,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -15,12 +34,13 @@ const LoginPage = () => {
       password: '',
     },
   });
+  const navigate = useNavigate();
 
-  const onSubmit = values => alert(JSON.stringify(values, null, 2));
+  const onSubmit = values => alert(JSON.stringify(values));
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         top: '50%',
         display: 'flex',
         flexDirection: 'column',
@@ -29,83 +49,64 @@ const LoginPage = () => {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 4,
+        backgroundColor: 'white',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+        padding: 6,
       }}
     >
-      <Grid container>
-        <Grid item xs>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Button variant="outlined">Register</Button>
-        </Grid>
-      </Grid>
-
-      {/* {loginError && (
-        <Alert color="error">
-          <AlertTitle>Error</AlertTitle>
-          <p>Invalid email or password</p>
-        </Alert>
-      )} */}
-      <Button type="submit" fullWidth variant="outlined" sx={{ mt: 3, mb: 2 }}>
-        <FontAwesomeIcon icon={['fab', 'google']} />
-        &nbsp; Sign In with Google
-      </Button>
-      <Divider style={{ width: '100%' }} />
-      <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
-        <Controller
-          control={control}
-          name="email"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              margin="normal"
-              fullWidth
-              label="Email"
-              autoComplete="username"
-              error={!!errors.email}
-              helperText={errors.email && 'Please enter a Email'}
-              autoFocus
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="password"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <TextField
-              margin="normal"
-              type="password"
-              required
-              fullWidth
-              label="Password"
-              error={!!errors.password}
-              helperText={errors.password && 'Please enter a password'}
-              autoComplete="current-password"
-              {...field}
-            />
-          )}
-        />
-        <Grid container spacing={3}>
-          <Grid item xs>
-            <Button type="submit" fullWidth variant="contained">
-              login
+      <Container className="m-4">
+        <Row xs="2" className="mb-3">
+          <Col>
+            <h4>Sign in</h4>
+          </Col>
+          <Col>
+            <Button block color="primary" outline onClick={() => navigate('/register')}>
+              Register
             </Button>
-          </Grid>
-          <Grid item xs>
-            <Link href="/forgot-password" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
+          </Col>
+        </Row>
+        <Button block outline className="mb-3" color="primary">
+          <FontAwesomeIcon icon={['fab', 'google']} />
+          &nbsp;Login with Google
+        </Button>
+        <hr style={{ width: '100%' }} />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <ValidatedInput
+            id="email"
+            name="email"
+            type="text"
+            placeholder="Email"
+            {...register('email', {
+              required: 'Required',
+              pattern: { value: /^\S+@\S+$/, message: 'Invalid email address' },
+            })}
+            invalid={!!errors.email}
+            error={errors.email?.message}
+          />
+          <ValidatedInput
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            {...register('password', { required: 'Required' })}
+            invalid={!!errors.password}
+            error={errors.password?.message}
+          />
+          <Row xs="2">
+            <Col>
+              <Button block color="primary" type="submit">
+                Login
+              </Button>
+            </Col>
+            <Col>
+              <Link style={{ textDecoration: 'none' }} to="/forgot-password">
+                Forgot password?
+              </Link>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+    </div>
   );
 };
 export default LoginPage;

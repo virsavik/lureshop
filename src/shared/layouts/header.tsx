@@ -21,6 +21,8 @@ export type HeaderMenuItemType = {
   label: string;
   icon: IconProp;
   path?: string;
+  isMenu?: boolean;
+  subItems?: HeaderMenuItemType[];
   badge?: number;
 };
 

@@ -1,24 +1,41 @@
 import React, { Suspense, useState } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import 'react-toastify/dist/ReactToastify.css';
-import Siderbar, { SidebarItem } from '../components/Sidebar/Sidebar';
 import Footer from './footer';
-import Header, { HeaderMenuItemType } from './header';
 import { toast, ToastContainer } from 'react-toastify';
-import { Badge, IconButton, MenuItem } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
+import WNavBar, { NavItemType } from './navbar';
 
-const itemList: HeaderMenuItemType[] = [
+const itemList: NavItemType[] = [
   { label: 'Home', icon: 'home', path: '/' },
   { label: 'Product', icon: ['fab', 'product-hunt'], path: '/product' },
-  { label: 'Sort', icon: 'sort' },
-  { label: 'Brand', icon: 'store' },
-  { label: 'Color', icon: 'droplet' },
-  { label: 'Liked', icon: 'heart', path: '/liked', badge: 2 },
+  {
+    label: 'Sort',
+    subItems: [{ label: 'Top' }, { label: 'New' }, { label: 'Price' }],
+  },
+  {
+    label: 'Brand',
+    subItems: [
+      { label: 'Rapala', path: '/brand/rapala' },
+      { label: 'Heddon', path: '/brand/heddon' },
+      { label: 'Cotton Cordell', path: '/brand/cotton-cordell' },
+      { label: 'Rebel', path: '/brand/rebel' },
+      { label: 'Mepps', path: '/brand/mepps' },
+      { label: 'none', path: '/brand/none' },
+    ],
+  },
+  {
+    label: 'Color',
+    subItems: [
+      { label: 'Red', path: '/color/red' },
+      { label: 'Blue', path: '/color/blue' },
+      { label: 'Green', path: '/color/green' },
+      { label: 'Yellow', path: '/color/yellow' },
+      { label: 'Brow', path: '/color/brow' },
+      { label: 'Black', path: '/color/black' },
+      { label: 'White', path: '/color/white' },
+      { label: 'Any', path: '/color/any' },
+    ],
+  },
+  { label: 'Liked', icon: 'heart', path: '/liked' },
 ];
 
 interface AppProps {
@@ -29,65 +46,33 @@ interface AppProps {
   window?: () => Window;
   children: React.ReactNode;
 }
-2;
-const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 const MainLayout = (props: AppProps) => {
-  const { window, children } = props;
-  const navigate = useNavigate();
-
   return (
-    <ThemeProvider theme={lightTheme}>
+    <div>
       <ToastContainer
         position={toast.POSITION.TOP_LEFT}
         className="toastify-container"
         toastClassName="toastify-toast"
       />
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <Header title="Lureshop" position="fixed">
-          {itemList.map(item => (
-            <MenuItem key={item.label} onClick={() => navigate(item.path)}>
-              {item.badge ? (
-                <>
-                  <Badge badgeContent={item.badge} color="error">
-                    <FontAwesomeIcon icon={item.icon} />
-                  </Badge>
-                  &nbsp; {item.label}
-                </>
-              ) : (
-                <>
-                  <FontAwesomeIcon icon={item.icon} />
-                  &nbsp; {item.label}
-                </>
-              )}
-            </MenuItem>
-          ))}
-        </Header>
-        {/* Main content */}
-        <Box
-          component="main"
-          sx={{
-            backgroundColor: theme =>
-              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
-            flexGrow: 1,
-            p: 3,
-            height: '100vh',
-            overflow: 'auto',
-          }}
-        >
-          <Toolbar />
-          {children}
-          {/* <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {children}
-          </Container> */}
-        </Box>
-      </Box>
-      {/* Footer content */}
-      <Box component="footer" sx={{ bgcolor: 'background.paper', py: 4 }}>
-        <Footer title="LureShop" description="Ứng dụng web bán đồ ăn cá" />
-      </Box>
-    </ThemeProvider>
+      <WNavBar
+        title="lureshop"
+        expand="md"
+        styles={{
+          backgroundColor: '#1976d2',
+        }}
+        items={itemList}
+      />
+      <div
+        className="container-fluid mt-5"
+        style={{
+          height: '100vh',
+        }}
+      >
+        {props.children}
+      </div>
+      <Footer title="lureshop" description="This is a website" />
+    </div>
   );
 };
 export default MainLayout;
