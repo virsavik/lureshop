@@ -1,6 +1,6 @@
-# Translator
+# Lureshop web application
 
-> Ứng dụng web học tiếng Anh.
+> Ứng dụng web quản lý lureshop.
 
 ## Features
 
