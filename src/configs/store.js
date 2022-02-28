@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import reducers from 'src/shared/reducers';
+import rootReducers from 'src/shared/reducers/index';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 import loggerMiddleware from './logger-middleware';
 
 const store = configureStore({
-  reducer: reducers,
+  reducer: rootReducers,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

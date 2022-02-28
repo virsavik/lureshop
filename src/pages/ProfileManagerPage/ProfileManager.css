@@ -1,0 +1,35 @@
+.bordered {
+  padding: 1.2rem;
+  border-style: groove;
+}
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  margin-right: 1rem;
+  border: 1px solid;
+}
+
+.avatar img {
+  height: 100%;
+  max-width: 250px;
+  object-fit: cover;
+}
+
+table {
+  width: 100%;
+}
+
+td p {
+  padding: 10px;
+}
+
+tr {
+  font-size: 1.1em;
+  padding: 1rem;
+  border-spacing: 30px;
+}
+
+th {
+  width: 15%;
+}

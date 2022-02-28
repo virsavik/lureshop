@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -9,9 +9,17 @@ import {
   Form,
   Row,
 } from 'reactstrap';
+import { useAppDispatch, useAppSelector } from '../../configs/store';
 import ValidatedInput from 'src/shared/components/ValidatedInput';
+import { loginWithGoogle } from '../../shared/reducers/user.reducer';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const loading = useAppSelector(state => state.user.loading);
+  const error = useAppSelector(state => state.user.errorMessage);
+  const success = useAppSelector(state => state.user.success);
+
   const {
     register,
     handleSubmit,
@@ -23,6 +31,20 @@ const LoginPage = () => {
     },
   });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(success){
+      navigate('/profile');
+      toast.success('Login Successful');
+    }
+    if(error && error.length > 0){
+      toast.error(error);
+    }
+  }, [loading])
+
+  const onLoginWithGoogle = () => {
+    dispatch(loginWithGoogle());
+  }
 
   // eslint-disable-next-line no-undef
   const onSubmit = values => alert(JSON.stringify(values));
@@ -54,7 +76,7 @@ const LoginPage = () => {
             </Button>
           </Col>
         </Row>
-        <Button block outline className="mb-3" color="primary">
+        <Button block outline className="mb-3" color="primary" onClick={() => onLoginWithGoogle()}>
           <FontAwesomeIcon icon={['fab', 'google']} />
           &nbsp;Login with Google
         </Button>

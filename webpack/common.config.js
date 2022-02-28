@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx'],
     alias: {
         "src": path.resolve('./src'),
         'react-dom': '@hot-loader/react-dom'

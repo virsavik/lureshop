@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Collapse,
   Nav,
@@ -13,12 +13,25 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../configs/store';
+import { reset as logoutGoogle } from '../reducers/user.reducer';
+import { toast } from 'react-toastify';
 
 const WNavBar = (props) => {
+  const userData = useAppSelector(state => state.user.account);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { title, styles, expand, items } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggleNavbar = () => setIsOpen(!isOpen);
+
+  const onGoogleLogout = () => {
+    dispatch(logoutGoogle());
+    navigate('/');
+    toast.warn('Logout Successful');
+  }
 
   return (
     <Navbar style={styles} fixed="top" dark expand={expand}>
@@ -50,7 +63,7 @@ const WNavBar = (props) => {
               } else {
                 return (
                   <NavItem key={it.label}>
-                    <NavLink href={it.path}>
+                    <NavLink tag={Link} to={it.path}>
                       <FontAwesomeIcon icon={it.icon} />
                       &nbsp; {it.label}
                     </NavLink>
@@ -61,17 +74,35 @@ const WNavBar = (props) => {
         </Nav>
         <Nav navbar>
           <NavItem>
-            <NavLink href="/cart">
+            <NavLink tag={Link} to="/cart">
               <FontAwesomeIcon icon="cart-shopping" />
               &nbsp;Cart
             </NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink href="/login">
-              <FontAwesomeIcon icon="right-to-bracket" />
-              &nbsp;Login
-            </NavLink>
-          </NavItem>
+          {userData && JSON.stringify(userData) !== JSON.stringify({}) ? (
+            <UncontrolledDropdown inNavbar nav>
+              <DropdownToggle caret nav>
+                &nbsp;Logged In
+              </DropdownToggle>
+              <DropdownMenu end>
+                <DropdownItem onClick={() => navigate("/profile")}>
+                  Profile
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => onGoogleLogout()}>
+                  Google Logout
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          ):(
+            <NavItem>
+              <NavLink tag={Link} to="/login">
+                <FontAwesomeIcon icon="right-to-bracket" />
+                &nbsp;Login
+              </NavLink>
+            </NavItem>
+          )
+        }
         </Nav>
       </Collapse>
     </Navbar>

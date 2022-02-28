@@ -2,7 +2,7 @@ import React from 'react';
 
 const SpinnerBar = () => (
 <>
-  <div classNameName="spinner-grow text-primary" role="status">
+  <div className="spinner-grow text-primary" role="status">
     <span className="sr-only">Loading...</span>
   </div>
   <div className="spinner-grow text-secondary" role="status">

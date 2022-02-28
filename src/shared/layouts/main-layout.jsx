@@ -56,9 +56,11 @@ const MainLayout = (props) => {
         items={itemList}
       />
       <div
-        className="container-fluid mt-5"
+        className=""
         style={{
           height: '100vh',
+          marginTop: '50px',
+          padding: '20px'
         }}
       >
         {props.children}
