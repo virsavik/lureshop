@@ -3,17 +3,21 @@ import {
   faAddressCard,
   faArrowLeft,
   faArrowRight,
+  faBan,
   faBars,
   faBell,
   faCartShopping,
   faDroplet,
+  faEye,
   faHeart,
   faHouse,
   faLanguage,
   faMinus,
+  faPencilAlt,
   faPlay,
   faPlus,
   faRightToBracket,
+  faSave,
   faSignInAlt,
   faSignOutAlt,
   faSort,
@@ -21,6 +25,7 @@ import {
   faStairs,
   faStar,
   faStore,
+  faSync,
   faTasks,
   faTrash,
   faUser,
@@ -56,8 +61,12 @@ export const loadIcon = () => {
     faProductHunt,
     faSort,
     faHeart,
-    faGoogle
-
+    faGoogle,
+    faSync,
+    faEye,
+    faPencilAlt,
+    faBan,
+    faSave
     // Add more icons here
   );
 };

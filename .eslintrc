@@ -6,10 +6,12 @@
     "prettier",
     "eslint-config-prettier"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
+    "ecmaVersion": 6,
     "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "allowImportExportEverywhere": true,
+    "requireConfigFile": false
   },
   "settings": {
     "react": {

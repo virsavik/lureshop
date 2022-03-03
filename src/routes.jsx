@@ -9,6 +9,7 @@ const RegisterPage = React.lazy(() => import('src/pages/RegisterPage/RegisterPag
 const ProfileManager = React.lazy(() => import('./pages/ProfileManagerPage/ProfileManager'));
 const Product = React.lazy(() => import('./pages/ProductPage/ProductPage'));
 const FavoritePage = React.lazy(() => import('./pages/FavoritePage/Favorite'));
+const UserManager = React.lazy(() => import('./pages/UserManagerPage/user-manager'));
 
 const ROUTES = [
   { path: '/login', element: <LoginPage /> },
@@ -16,6 +17,7 @@ const ROUTES = [
   { path: '/product', element: <Product /> },
   { path: '/profile', element: <ProfileManager /> },
   { path: '/liked', element: <FavoritePage /> },
+  { path: '/user-manager', element: <UserManager /> },
   // Add some route here
 ];
 
