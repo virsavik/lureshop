@@ -1,38 +1,37 @@
-import React, { useEffect } from "react";
-import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Button, Input } from "reactstrap";
-import { useAppDispatch, useAppSelector } from "../../configs/store";
-import { setUser as saveProfile } from "../../shared/reducers/user.reducer";
-import "./ProfileManager.css";
+import React, { useEffect } from 'react';
+import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane, Button, Input } from 'reactstrap';
+import { useAppDispatch, useAppSelector } from '../../configs/store';
+import { setUser as saveProfile } from '../../shared/reducers/user.reducer';
+import './ProfileManager.css';
 
 const ProfileManager = () => {
   const [activeTab, setActiveTab] = React.useState('1');
   const dispatch = useAppDispatch();
 
   const userData = useAppSelector(state => state.user.account);
-  const [profile, setProfile] = React.useState({...userData}); 
+  const [profile, setProfile] = React.useState({ ...userData });
 
-  useEffect(() => {
-  }, [activeTab])
+  useEffect(() => {}, [activeTab]);
 
   const toggleTab = tabId => {
     setActiveTab(tabId);
-  }
+  };
 
-  const handleChangeProfile = (e) => {
-    const {name, value} = e.target;
-    setProfile({...profile, [name]: value});
-  }
+  const handleChangeProfile = e => {
+    const { name, value } = e.target;
+    setProfile({ ...profile, [name]: value });
+  };
 
   const onSave = () => {
     dispatch(saveProfile(profile));
-  }
+  };
 
   return (
     <div className="bordered">
       <Row>
         <Col sm="12" md="4" lg="2">
           <div className="avatar">
-            <img src={userData.ImageUrl} alt={userData.Fullname}/>
+            <img src={userData.ImageUrl} alt={userData.Fullname} />
           </div>
         </Col>
         <Col sm="12" md="8" lg="10">
@@ -44,18 +43,12 @@ const ProfileManager = () => {
       <div className="mt-3">
         <Nav tabs>
           <NavItem>
-            <NavLink
-              className={activeTab === '1' ? 'active' : ''}
-              onClick={()=>toggleTab('1')}
-            >
+            <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => toggleTab('1')}>
               Basic Info
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink
-              className={activeTab === '2' ? 'active' : ''}
-              onClick={()=>toggleTab('2')}
-            >
+            <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => toggleTab('2')}>
               Additional Info
             </NavLink>
           </NavItem>
@@ -69,7 +62,9 @@ const ProfileManager = () => {
                     {Object.keys(profile).map((key, index) => (
                       <tr key={index}>
                         <th>{key}</th>
-                        <td><p>{profile[key]}</p></td>
+                        <td>
+                          <p>{profile[key]}</p>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -86,13 +81,20 @@ const ProfileManager = () => {
                       <tr key={index}>
                         <th>{key}</th>
                         <td>
-                          <Input type="text" name={key} defaultValue={profile[key]} onChange={(e) => handleChangeProfile(e)}/>
+                          <Input
+                            type="text"
+                            name={key}
+                            defaultValue={profile[key]}
+                            onChange={e => handleChangeProfile(e)}
+                          />
                         </td>
                       </tr>
                     ))}
                     <tr>
                       <td colSpan={2}>
-                        <Button block color="primary" onClick={() => onSave()}>Save</Button>
+                        <Button block color="primary" onClick={() => onSave()}>
+                          Save
+                        </Button>
                       </td>
                     </tr>
                   </tbody>
@@ -103,6 +105,6 @@ const ProfileManager = () => {
         </TabContent>
       </div>
     </div>
-  )
-}
+  );
+};
 export default ProfileManager;

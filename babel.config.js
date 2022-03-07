@@ -1,25 +1,16 @@
 module.exports = {
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-react',
-    // '@babel/typescript',
-    // [
-    //   '@babel/preset-react',
-    //   {
-    //     runtime: 'automatic',
-    //   },
-    // ],
-  ],
+  presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: [
     [
       'module-resolver',
       {
-        root: ['./src'],
+        root: ['.'],
         alias: {
           'react-dom': '@hot-loader/react-dom',
-          '@': './src',
+          'src/*': ['./src/*'],
+          // '@': './src',
         },
-        extensions: ['.js', '.ts', '.jsx', '.tsx'],
+        extensions: ['.js', '.jsx'],
       },
     ],
   ],

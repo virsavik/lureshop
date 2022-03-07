@@ -3,7 +3,7 @@
  * Get either localStorage or sessionStorage
  * @param type storage type
  */
-export const getStorage = (type) => {
+export const getStorage = type => {
   if (type === 'SESSION') {
     return window.sessionStorage;
   }
@@ -16,7 +16,7 @@ export const getStorage = (type) => {
  * @param key key to set
  * @param value value to set
  */
-const setItem = (type) => (key, value) => {
+const setItem = type => (key, value) => {
   getStorage(type).setItem(key, JSON.stringify(value));
 };
 
@@ -26,7 +26,7 @@ const setItem = (type) => (key, value) => {
  * @param key key to get
  * @param defaultVal value to return if key doesnt exist
  */
-const getItem = (type) => (key, defaultVal) => {
+const getItem = type => (key, defaultVal) => {
   const val = getStorage(type).getItem(key);
   if (!val || val === 'undefined') return defaultVal;
   try {
@@ -41,7 +41,7 @@ const getItem = (type) => (key, defaultVal) => {
  * @param type storage type
  * @param key key to remove
  */
-const removeItem = (type) => (key) => {
+const removeItem = type => key => {
   getStorage(type).removeItem(key);
 };
 

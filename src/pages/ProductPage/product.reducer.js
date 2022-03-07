@@ -1,49 +1,46 @@
-import  { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllProductsAsync } from '../../shared/mock-data';
 
 const initialState = {
   products: [],
   loading: false,
-  errorMessage: "",
+  errorMessage: '',
   totalItems: 0,
 };
 
 // Actions
 
-export const getAllProducts = createAsyncThunk(
-  "product/get_all_products",
-  async () => {
-    const response = await getAllProductsAsync();
-    return response;
-  }
-);
+export const getAllProducts = createAsyncThunk('product/get_all_products', async () => {
+  const response = await getAllProductsAsync();
+  return response;
+});
 
 // Slice
 
 const productSlice = createSlice({
-  name: "product",
+  name: 'product',
   initialState,
   reducers: {
-    reset(){
+    reset() {
       return initialState;
     },
   },
-  extraReducers(builder){
+  extraReducers(builder) {
     builder
       .addCase(getAllProducts.fulfilled, (state, action) => {
-        state.products = action.payload
+        state.products = action.payload;
         state.totalItems = action.payload.length || 0;
         state.loading = false;
       })
       .addCase(getAllProducts.pending, state => {
         state.loading = true;
-        state.errorMessage = "";
+        state.errorMessage = '';
       })
       .addCase(getAllProducts.rejected, (state, action) => {
         state.loading = false;
-        state.errorMessage = action.error.message || "Something went wrong";
+        state.errorMessage = action.error.message || 'Something went wrong';
       });
-  }
+  },
 });
 
 export const { reset } = productSlice.actions;

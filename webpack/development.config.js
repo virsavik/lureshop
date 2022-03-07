@@ -27,7 +27,7 @@ module.exports = {
 
     // Join publicPath to devServer
     static: {
-      directory: path.join(__dirname, "../public") // __dirname: /webpack
+      directory: path.join(__dirname, '../public'), // __dirname: /webpack
     },
   },
   plugins: [
@@ -74,9 +74,9 @@ module.exports = {
       //   include: /\.module\.css$/,
       // },
       {
-          test: /\.js$/,
-          enforce: 'pre',
-          use: ['source-map-loader'],
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
     ],
   },

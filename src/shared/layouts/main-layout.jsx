@@ -35,11 +35,10 @@ const itemList = [
     ],
   },
   { label: 'Liked', icon: 'heart', path: '/liked' },
+  { label: 'User Manager', icon: 'list-check', path: '/user-manager' },
 ];
 
-
-
-const MainLayout = (props) => {
+const MainLayout = props => {
   return (
     <div>
       <ToastContainer
@@ -60,7 +59,7 @@ const MainLayout = (props) => {
         style={{
           height: '100vh',
           marginTop: '50px',
-          padding: '20px'
+          padding: '20px',
         }}
       >
         {props.children}

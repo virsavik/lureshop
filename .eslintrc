@@ -8,10 +8,20 @@
   ],
   "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 9, // ECMAScript 9
     "sourceType": "module",
     "allowImportExportEverywhere": true,
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "commonjs": true
   },
   "settings": {
     "react": {
@@ -24,7 +34,7 @@
     "no-labels": "error",
     "no-caller": "error",
     "no-bitwise": "error",
-    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-new-wrappers": "error",
     "no-eval": "error",
     "no-new": "error",

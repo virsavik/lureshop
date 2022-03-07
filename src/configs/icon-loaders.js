@@ -12,6 +12,7 @@ import {
   faHeart,
   faHouse,
   faLanguage,
+  faListCheck,
   faMinus,
   faPencilAlt,
   faPlay,
@@ -66,7 +67,11 @@ export const loadIcon = () => {
     faEye,
     faPencilAlt,
     faBan,
-    faSave
+    faSave,
+    faListCheck,
+    faLanguage,
+    faStar,
+    faStairs
     // Add more icons here
   );
 };

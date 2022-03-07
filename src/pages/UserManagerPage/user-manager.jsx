@@ -24,7 +24,7 @@ const UserManager = () => {
 
   useEffect(() => {
     dispatch(getUserList());
-  }, [])
+  }, []);
 
   // useEffect(() => {
   //   if (updateSuccess) {
@@ -37,43 +37,43 @@ const UserManager = () => {
 
   const handleSyncList = () => {
     dispatch(getUserList());
-  }
+  };
 
-  const sort = (key) => {
+  const sort = key => {
     dispatch(sortBy(key));
-  }
+  };
 
   const closeDeleteDialog = () => {
     setOpenDeleteDialog(false);
-  }
+  };
 
-  const onDeleteUser = (user) => {
+  const onDeleteUser = user => {
     setSelectedUser(user);
     setOpenDeleteDialog(true);
-  }
+  };
 
   const closeDetailDialog = () => {
     setOpenDetailDialog(false);
-  }
+  };
 
-  const onDetailUser = (user) => {
+  const onDetailUser = user => {
     setSelectedUser(user);
     setOpenDetailDialog(true);
-  }
+  };
 
   const closeUpdateDialog = () => {
     setOpenUpdateDialog(false);
-  }
+  };
 
-  const onUpdateUser = (user) => {
+  const onUpdateUser = user => {
     setSelectedUser(user);
     setOpenUpdateDialog(true);
-  }
+  };
 
   const onCreateNewUser = () => {
     setOpenUpdateDialog(true);
     setSelectedUser({});
-  }
+  };
 
   return (
     <div>
@@ -81,13 +81,15 @@ const UserManager = () => {
         <p>User Managerment</p>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            Refresh List
+            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh List
           </Button>
-          <Button className="btn btn-primary jh-create-entity" id="jh-create-entity" onClick={() => onCreateNewUser()}>
+          <Button
+            className="btn btn-primary jh-create-entity"
+            id="jh-create-entity"
+            onClick={() => onCreateNewUser()}
+          >
             <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            Create new user
+            &nbsp; Create new user
           </Button>
         </div>
       </h2>
@@ -134,21 +136,15 @@ const UserManager = () => {
                     <div className="btn-group flex-btn-group-container">
                       <Button color="info" size="sm" onClick={() => onDetailUser(user)}>
                         <FontAwesomeIcon icon="eye" />{' '}
-                        <span className="d-none d-md-inline">
-                          View
-                        </span>
+                        <span className="d-none d-md-inline">View</span>
                       </Button>
                       <Button color="primary" size="sm" onClick={() => onUpdateUser(user)}>
                         <FontAwesomeIcon icon="pencil-alt" />{' '}
-                        <span className="d-none d-md-inline">
-                          Edit
-                        </span>
+                        <span className="d-none d-md-inline">Edit</span>
                       </Button>
-                      <Button color="danger" size="sm" onClick={()=>onDeleteUser(user)}>
+                      <Button color="danger" size="sm" onClick={() => onDeleteUser(user)}>
                         <FontAwesomeIcon icon="trash" />{' '}
-                        <span className="d-none d-md-inline">
-                          Delete
-                        </span>
+                        <span className="d-none d-md-inline">Delete</span>
                       </Button>
                     </div>
                   </td>
@@ -157,17 +153,25 @@ const UserManager = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && (
-            <div className="alert alert-warning">
-              No user found
-            </div>
-          )
+          !loading && <div className="alert alert-warning">No user found</div>
         )}
       </div>
-      <UserDeleteModal isOpen={openDeleteDialog} handleClose={closeDeleteDialog} userData={selectedUser}/>
-      <UserDetailModal isOpen={openDetailDialog} handleClose={closeDetailDialog} userData={selectedUser}/>
-      <UserUpdateModal isOpen={openUpdateDialog} handleClose={closeUpdateDialog} userData={selectedUser}/>
+      <UserDeleteModal
+        isOpen={openDeleteDialog}
+        handleClose={closeDeleteDialog}
+        userData={selectedUser}
+      />
+      <UserDetailModal
+        isOpen={openDetailDialog}
+        handleClose={closeDetailDialog}
+        userData={selectedUser}
+      />
+      <UserUpdateModal
+        isOpen={openUpdateDialog}
+        handleClose={closeUpdateDialog}
+        userData={selectedUser}
+      />
     </div>
-  )
-}
+  );
+};
 export default UserManager;

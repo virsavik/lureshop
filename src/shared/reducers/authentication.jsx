@@ -39,15 +39,18 @@ export const getAccount = createAsyncThunk(
 
 export const authenticate = createAsyncThunk(
   'authentication/signin',
-  async ({username, password, rememberMe}) => axios.post(`${API_URL}/login`, {username, password, rememberMe}),
+  async ({ username, password, rememberMe }) =>
+    axios.post(`${API_URL}/login`, { username, password, rememberMe }),
   {
     serializeError: serializeAxiosError,
   }
 );
 
-export const signin = (username, password, rememberMe = false) => async dispatch => {
+export const signin =
+  (username, password, rememberMe = false) =>
+  async dispatch => {
     const result = await dispatch(authenticate({ username, password, rememberMe }));
-    const response = result.payload// as AxiosResponse;
+    const response = result.payload; // as AxiosResponse;
     const bearerToken = response.data.token; // Bearer token from the server
     if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
       const jwt = bearerToken.slice(7, bearerToken.length);

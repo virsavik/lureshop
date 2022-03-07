@@ -11,7 +11,7 @@ const rootReducer = {
   user,
   product,
   favorite,
-  userManager
+  userManager,
 };
 
 export default rootReducer;

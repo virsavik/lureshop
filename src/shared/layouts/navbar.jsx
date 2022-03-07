@@ -18,7 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../configs/store';
 import { reset as logoutGoogle } from '../reducers/user.reducer';
 import { toast } from 'react-toastify';
 
-const WNavBar = (props) => {
+const WNavBar = props => {
   const userData = useAppSelector(state => state.user.account);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const WNavBar = (props) => {
     dispatch(logoutGoogle());
     navigate('/');
     toast.warn('Logout Successful');
-  }
+  };
 
   return (
     <Navbar style={styles} fixed="top" dark expand={expand}>
@@ -85,24 +85,19 @@ const WNavBar = (props) => {
                 &nbsp;Logged In
               </DropdownToggle>
               <DropdownMenu end>
-                <DropdownItem onClick={() => navigate("/profile")}>
-                  Profile
-                </DropdownItem>
+                <DropdownItem onClick={() => navigate('/profile')}>Profile</DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={() => onGoogleLogout()}>
-                  Google Logout
-                </DropdownItem>
+                <DropdownItem onClick={() => onGoogleLogout()}>Google Logout</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-          ):(
+          ) : (
             <NavItem>
               <NavLink tag={Link} to="/login">
                 <FontAwesomeIcon icon="right-to-bracket" />
                 &nbsp;Login
               </NavLink>
             </NavItem>
-          )
-        }
+          )}
         </Nav>
       </Collapse>
     </Navbar>

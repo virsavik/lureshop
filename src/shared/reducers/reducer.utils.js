@@ -1,6 +1,6 @@
 const commonErrorProperties = ['name', 'message', 'stack', 'code'];
 
-export const serializeAxiosError = (value) => {
+export const serializeAxiosError = value => {
   if (typeof value === 'object' && value !== null) {
     if (value.isAxiosError) {
       return value;
