@@ -2,9 +2,10 @@ import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
 import WNavBar from './navbar';
+import { Outlet } from 'react-router-dom';
 
 const itemList = [
-  { label: 'Home', icon: 'home', path: '/' },
+  { label: 'Home', icon: 'home', path: '/home' },
   { label: 'Product', icon: ['fab', 'product-hunt'], path: '/product' },
   {
     label: 'Sort',
@@ -62,7 +63,7 @@ const MainLayout = props => {
           padding: '20px',
         }}
       >
-        {props.children}
+        <Outlet />
       </div>
       {/* <Footer title="lureshop" description="This is a website" /> */}
     </div>

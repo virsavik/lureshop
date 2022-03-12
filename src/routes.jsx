@@ -1,24 +1,36 @@
 import React from 'react';
-// import LoginPage from 'src/pages/LoginPage/LoginPage';
-// import RegisterPage from 'src/pages/RegisterPage/RegisterPage';
-// import ProfileManager from './pages/ProfileManagerPage/ProfileManager';
-// import Product from './pages/ProductPage/ProductPage';
+import { useRoutes } from 'react-router-dom';
 
+const MainLayout = React.lazy(() => import('./shared/layouts/main-layout'));
 const LoginPage = React.lazy(() => import('src/pages/LoginPage/LoginPage'));
 const RegisterPage = React.lazy(() => import('src/pages/RegisterPage/RegisterPage'));
 const ProfileManager = React.lazy(() => import('./pages/ProfileManagerPage/ProfileManager'));
 const Product = React.lazy(() => import('./pages/ProductPage/ProductPage'));
 const FavoritePage = React.lazy(() => import('./pages/FavoritePage/Favorite'));
 const UserManager = React.lazy(() => import('./pages/UserManagerPage/user-manager'));
+const Home = React.lazy(() => import('./pages/HomePage/Home'));
 
-const ROUTES = [
-  { path: '/login', element: <LoginPage /> },
-  { path: '/register', element: <RegisterPage /> },
-  { path: '/product', element: <Product /> },
-  { path: '/profile', element: <ProfileManager /> },
-  { path: '/liked', element: <FavoritePage /> },
-  { path: '/user-manager', element: <UserManager /> },
-  // Add some route here
+export const ROUTES = [
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      { path: '/home', element: <Home /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
+      { path: '/product', element: <Product /> },
+      { path: '/profile', element: <ProfileManager /> },
+      { path: '/liked', element: <FavoritePage /> },
+      { path: '/user-manager', element: <UserManager /> },
+      // Add some route here
+      { path: '*', element: <Home /> },
+    ],
+  },
 ];
 
-export default ROUTES;
+const BrowerRouterProvider = () => {
+  const routeElements = useRoutes(ROUTES);
+  return routeElements;
+};
+
+export default BrowerRouterProvider;
