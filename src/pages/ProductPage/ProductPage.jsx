@@ -14,7 +14,8 @@ import {
   Spinner,
 } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '../../configs/store';
-import { addProductToFavorite } from '../FavoritePage/favorite.reducer';
+import { addProductToFavorite } from '../../shared/reducers/favorite.reducer';
+import { addToCart as addCart } from 'src/shared/reducers/cart.reducer';
 import { getAllProducts } from './product.reducer';
 
 const Product = () => {
@@ -34,8 +35,9 @@ const Product = () => {
   };
 
   const addToCart = product => {
-    // eslint-disable-next-line no-undef
-    alert(`You added ${product.name} to cart`);
+    dispatch(addCart(product)).then(() => {
+      toast.success(`${product.name} added to cart!`);
+    });
   };
 
   return (

@@ -32,7 +32,7 @@ export const productDatas = [
     id: 1,
     name: 'Mepps LongCast Gold #3/12g',
     subtitle: "It's a long cast gold",
-    price: '33.00',
+    price: 33,
     description: 'Lorem ipsum dolor amesithis is a long description',
     image:
       'https://www.lureshop.eu/pub/media/catalog/product/cache/b8d672e2dccc5833e42803eb06f329a1/l/o/longcast_gold_1.jpg',
@@ -41,7 +41,7 @@ export const productDatas = [
     id: 2,
     name: 'Mepps LongCast Silver #2/8g',
     subtitle: "It's a long cast silver",
-    price: '23.00',
+    price: 23,
     description: 'This is a Mepps LongCast Silver #2/8g to test the description length',
     image:
       'https://www.lureshop.eu/pub/media/catalog/product/cache/b8d672e2dccc5833e42803eb06f329a1/l/o/longcast_silver.jpg',
@@ -50,7 +50,7 @@ export const productDatas = [
     id: 3,
     name: 'SG Ball Jigg Heads - Tournament Series 10g/Hook#6/0',
     subtitle: "It's a Ball Jigg Heads",
-    price: '13.00',
+    price: 13.0,
     description:
       'This is a SG Ball Jigg Heads - Tournament Series 10g/Hook#6/0 to test the description length',
     image:
@@ -60,7 +60,7 @@ export const productDatas = [
     id: 4,
     name: 'Rublex Veltic ANV #3/5g',
     subtitle: "It's a Veltic ANV",
-    price: '100',
+    price: 100,
     description: 'This is a Rublex Veltic ANV #3/5g to test the description length',
     image:
       'https://www.lureshop.eu/pub/media/catalog/product/cache/b8d672e2dccc5833e42803eb06f329a1/r/u/rublex_veltic_3_anv.jpg',
@@ -69,7 +69,7 @@ export const productDatas = [
     id: 5,
     name: 'Mepps Aglia TW Streamer Silver #2/4.7g',
     subtitle: "It's a Aglia TW Streamer Silver",
-    price: '100',
+    price: 100,
     description: 'This is a Mepps Aglia TW Streamer Silver #2/4.7g to test the description length',
     image:
       'https://www.lureshop.eu/pub/media/catalog/product/cache/b8d672e2dccc5833e42803eb06f329a1/a/g/aglia_tw_streamer_s.jpg',
