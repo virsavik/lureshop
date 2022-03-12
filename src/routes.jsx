@@ -16,6 +16,7 @@ export const ROUTES = [
     path: '/',
     element: <MainLayout />,
     children: [
+      { index: true, element: <Home /> },
       { path: '/home', element: <Home /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/register', element: <RegisterPage /> },
