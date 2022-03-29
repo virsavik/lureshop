@@ -22,6 +22,17 @@ export const removeFromCart = createAsyncThunk('cart/remove_from_cart', async pr
   });
 });
 
+export const updateQuantity = createAsyncThunk(
+  'cart/update_quantity',
+  async (productId, quantity) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ productId, quantity });
+      }, 200);
+    });
+  }
+);
+
 // Slice
 const cartSlice = createSlice({
   name: 'cart',
@@ -45,6 +56,14 @@ const cartSlice = createSlice({
         state.loading = false;
       })
       .addCase(removeFromCart.pending, state => {
+        state.loading = true;
+      })
+      .addCase(updateQuantity.fulfilled, (state, action) => {
+        state.products.find(p => p.id === action.payload.productId).quantity =
+          action.payload.quantity;
+        state.loading = false;
+      })
+      .addCase(updateQuantity.pending, state => {
         state.loading = true;
       });
   },

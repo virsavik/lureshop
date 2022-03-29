@@ -1,11 +1,29 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Card, CardHeader, Button, Row, Col, CardBody, Table, Input, CardFooter } from 'reactstrap';
-import { useAppSelector } from 'src/configs/store';
+import { useAppDispatch, useAppSelector } from 'src/configs/store';
+import { removeFromCart, updateQuantity } from 'src/shared/reducers/cart.reducer';
 
 const Cart = () => {
-  const carted = useAppSelector(state => state.cart.products);
+  const dispatch = useAppDispatch();
+  const cartStore = useAppSelector(state => state.cart.products);
+  const [carted, setCarted] = useState(cartStore);
   const loading = useAppSelector(state => state.cart.loading);
+
+  const removeProduct = product => {
+    setCarted(carted.filter(item => item.id !== product.id));
+    dispatch(removeFromCart(product.id)).then(() => {
+      toast.success(`${product.name} removed from cart`);
+    });
+  };
+
+  const onChangeQuantity = (product, e) => {
+    const quantity = +e.target.value;
+    if (quantity > 1) {
+      setCarted(carted.map(p => (p.id === product.id ? { ...product, quantity } : p)));
+    }
+  };
 
   return (
     <div>
@@ -37,28 +55,39 @@ const Cart = () => {
                       <h5>{product.name}</h5>
                       <p>{product.subtitle}</p>
                     </td>
-                    <td>{product.price}</td>
+                    <td>&#36;{product.price.toFixed(2)}</td>
                     <td>
-                      <Input type="number" defaultValue={product.quantity} />
+                      <Input
+                        type="number"
+                        min="1"
+                        style={{ maxWidth: '100px' }}
+                        defaultValue={product.quantity}
+                        onChange={e => onChangeQuantity(product, e)}
+                      />
                     </td>
                     <td>
-                      <Button color="danger" size="sm" outline>
+                      <Button
+                        color="danger"
+                        size="sm"
+                        outline
+                        onClick={() => removeProduct(product)}
+                      >
                         <FontAwesomeIcon icon="trash" />
                       </Button>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr>
+                <tr key="no-product">
                   <td colSpan="3">No products in cart</td>
                 </tr>
               )}
-              <tr>
-                <div style={{ textAlign: 'right' }}>
+              <tr key="continue-shopping">
+                <td style={{ textAlign: 'right' }}>
                   <Button className="mt-3" color="primary" size="sm" outline>
                     Continue Shopping
                   </Button>
-                </div>
+                </td>
               </tr>
             </tbody>
           </Table>
